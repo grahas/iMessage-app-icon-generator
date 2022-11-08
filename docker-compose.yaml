@@ -1,0 +1,42 @@
+version: '3'
+services:
+  nodejs-server:
+    build:
+      context: ./src/back_end
+    ports:
+      - "3080:3080"
+      - "9229:9229"
+    container_name: node-api
+    volumes:
+       - ./src/back_end:/usr/src/app/api
+       - /usr/src/app/api/node_modules
+  react-ui:
+    build:
+      context: ./src/front_end
+    ports:
+      - "3000:3000"
+    container_name: react-ui
+    stdin_open: true
+    volumes:
+       - ./src/front_end:/usr/src/app/my-app
+       - /usr/src/app/my-app/node_modules
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    volumes:
+      - ./src/nginx/nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - 80:80
+      - 443:443
+    depends_on:
+      - react-ui
+      - nodejs-server
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: 'rabbitmq'
+    ports:
+        - 5672:5672
+        - 15672:15672
+    volumes:
+        - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+        - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq

@@ -15,3 +15,15 @@ Convert a 1024px x 1024px .png to:
 - 64px x 48px
 - 96px x 72px
 - 1024px x 768px
+
+# App commands
+// build with no cache
+docker-compose build --no-cache
+// start the services
+docker-compose up
+// list the services
+docker-compose ps
+// list the containers
+docker ps
+// stop services
+docker-compose stop
