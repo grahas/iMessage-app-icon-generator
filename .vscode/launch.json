@@ -5,6 +5,22 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Attach to front_end",
+            "request": "launch",
+            "type": "chrome",
+            "url": "http://localhost:80",
+            "webRoot": "${workspaceFolder}/src/front_end"
+        },
+        {
+            "name": "Attach Task Worker",
+            "type": "python",
+            "request": "attach",
+            "connect": {
+              "host": "localhost",
+              "port": 5678
+            }
+        },
+        {
             "address": "localhost",
             "localRoot": "${workspaceFolder}/src/back_end",
             "name": "Docker: Attach to Node",

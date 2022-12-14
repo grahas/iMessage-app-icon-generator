@@ -9,14 +9,21 @@
     "dev": "nodemon --inspect=0.0.0.0:9229 ./app.js localhost 3080"
   },
   "dependencies": {
+    "adm-zip": "^0.5.9",
+    "celery-node": "^0.5.9",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "express": "~4.16.1",
     "express-fileupload": "^1.4.0",
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
+    "jszip": "^3.10.1",
+    "lodash": "^4.17.21",
     "morgan": "~1.9.1",
+    "node-zip": "^1.1.1",
     "nodemon": "^2.0.20",
+    "redis": "^4.5.0",
+    "socket.io": "^4.5.3",
     "webpack": "^5.74.0"
   },
   "devDependencies": {

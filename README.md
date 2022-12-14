@@ -27,3 +27,5 @@ docker-compose ps
 docker ps
 // stop services
 docker-compose stop
+
+python3 -m venv venv

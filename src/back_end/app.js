@@ -4,6 +4,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const fileUpload = require("express-fileupload");
+const http = require('http');
+const { Server } = require("socket.io");
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -11,6 +13,8 @@ var uploadsRouter = require('./routes/uploads');
 
 var app = express();
 var port = process.env.PORT || 3080;
+const server = http.createServer(app);
+const io = new Server(server);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -45,6 +49,10 @@ app.use(function(err, req, res, next) {
 
 app.listen(port, function () {
   console.log('Example app listening on port ' + port + '!');
+});
+
+io.on('connection', (socket) => {
+  console.log('a user connected');
 });
 
 module.exports = app;
