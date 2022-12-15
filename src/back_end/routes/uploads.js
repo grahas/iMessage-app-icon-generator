@@ -32,6 +32,7 @@ router.post('/', function (req, res, next) {
             let images = await r.mGet(redis.commandOptions({ returnBuffers: true }), results['data']);
             let image_dict = _.zipObject(results['data'], images);
             _.forOwn(image_dict, function(value, key) { 
+                r.del(key)
                 key = _.last(key.split("/"));
                 zip.file(`${key}.png`, value, {binary: true}); // shouldnt hardcode png
             });
@@ -42,12 +43,14 @@ router.post('/', function (req, res, next) {
 });
 
 router.get('/:taskId', async function(req, res, next) {
-    let file = await r.get(redis.commandOptions({ returnBuffers: true }), `zip/${req.params.taskId}`)
+    let key = `zip/${req.params.taskId}`
+    let file = await r.get(redis.commandOptions({ returnBuffers: true }), key)
     const fileName = 'icons.zip';
     res.writeHead(200,{ 
             'Content-Type': `application/zip`, 
             'Content-Disposition': `attachment; filename="${fileName}"` })
     res.end(file)
+    r.del(key)
 });
 
 module.exports = router;

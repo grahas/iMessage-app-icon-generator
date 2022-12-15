@@ -7,8 +7,8 @@ from celery import Celery
 import debugpy
 import redis
 
-app = Celery('tasks', backend='redis://localhost:6379/0', broker='amqp://guest:guest@localhost:5672//')
-r = redis.Redis(host='localhost', port=6379, db=0)
+app = Celery('tasks', backend='redis://redis:6379/0', broker='amqp://guest:guest@rabbitmq:5672//')
+r = redis.Redis(host='redis', port=6379, db=0)
 pipeline = r.pipeline()
 
 STICKER_INFO_YAML_PATH = "../resources/sticker_info.yaml"
