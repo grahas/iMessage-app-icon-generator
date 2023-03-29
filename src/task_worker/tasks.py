@@ -34,7 +34,7 @@ def resize_image(self, icon):
     result_keys = []
     for new_width, new_height in resize_sizes:
         # Resizes the image and retains aspect ratio
-        resized_img = PIL.ImageOps.contain(image, (new_width, new_height))
+        resized_img = PIL.ImageOps.contain(image, (new_width, new_height), method=PIL.Image.LANCZOS)
         img_byte_arr = io.BytesIO()
         resized_img.save(img_byte_arr, format='PNG')
         img_byte_arr = img_byte_arr.getvalue()
