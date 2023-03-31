@@ -1,1 +1,2 @@
-from ../task_worker import resize_image
+from ../task_worker import image_resize
+
